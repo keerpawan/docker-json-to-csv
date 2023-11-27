@@ -1,0 +1,13 @@
+{
+    "name": "convert-perf",
+    "version": "1.0.0",
+    "description": "Converts Json to CSV",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "author": "keerpawan",
+    "license": "ISC",
+    "dependencies": {
+      "jsonexport": "^3.2.0"
+    }
+  }

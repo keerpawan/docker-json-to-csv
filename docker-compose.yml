@@ -1,0 +1,7 @@
+services:
+  convert:
+    image: convert:latest
+    container_name: conv
+    volumes:
+      - ./app:/opt/app
+      - ./data:/opt/data
