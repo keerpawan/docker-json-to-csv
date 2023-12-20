@@ -108,8 +108,10 @@ const main = async function() {
       console.log(err);
 
       // Sleep for 1 minute
-      console.log("Sleeping for 1 minute");
-      await new Promise(resolve => setTimeout(resolve, 60000));
+      const rateLimitReset = err.response.headers['x-ratelimit-reset'];
+      const sleepDuration = rateLimitReset ? (rateLimitReset - Math.floor(Date.now() / 1000)) : 60;
+      console.log(`Sleeping for ${sleepDuration} seconds`);
+      await new Promise(resolve => setTimeout(resolve, sleepDuration * 1000));
       console.log("Waking up");
       continue;
     }
