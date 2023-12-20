@@ -45,7 +45,7 @@ const updateMap = function(files) {
     return; 
   }
 
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>> Found test and code files");
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>> Found test and code files <<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
   codeFiles.forEach(function(codeFile) {
     if (fileMap[codeFile]) {
@@ -71,8 +71,8 @@ const writeMap = function() {
 };
 
 const main = async function() {
-  // number of pages to get (30 PRs per page) - Nothing found until 300
-  let pageNumber = 300;
+  // number of pages to get (30 PRs per page) - Nothing found until page 76 or 9000th PR early 2020
+  let pageNumber = 76;
   while (pageNumber > 0) {
     console.log("#############################################");
     console.log(`Getting pulls for page ${pageNumber}`);

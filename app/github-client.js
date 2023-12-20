@@ -14,7 +14,7 @@ const octokit = new Octokit({
 
 const getClosedPullsUrl = function(repoName, page = 1) {
     // defaults to 30 PRs per page
-    return `GET /repos/${repoName}/pulls?page=${page}&state=closed`
+    return `GET /repos/${repoName}/pulls?page=${page}&state=closed&per_page=100`
 }
 
 const getFilesUrl = function(repoName, pullNumber) {
