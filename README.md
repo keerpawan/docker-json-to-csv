@@ -9,7 +9,7 @@ Make sure you have docker desktop running
 
 ### 1. Build image
 ```
-docker build -t convert:latest --target build --file ./Dockerfile .
+docker build -t convert:latest --target build --file ./Dockerfile.json2csv .
 ```
 
 ### 2. Put the performance JSON contents to be converted in data/input.json

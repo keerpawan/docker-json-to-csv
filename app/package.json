@@ -3,11 +3,15 @@
     "version": "1.0.0",
     "description": "Converts Json to CSV",
     "scripts": {
-      "start": "node index.js"
+        "start:json2csv": "node json-to-csv.js",
+        "start:file2testmap": "node file-to-test-mapper.js $REPO_PATH"
     },
     "author": "keerpawan",
     "license": "ISC",
     "dependencies": {
-      "jsonexport": "^3.2.0"
+        "@octokit/core": "^5.0.2",
+        "dotenv": "^16.3.1",
+        "jsonexport": "^3.2.0",
+        "request": "^2.88.2"
     }
-  }
+}

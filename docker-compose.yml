@@ -5,3 +5,12 @@ services:
     volumes:
       - ./app:/opt/app
       - ./data:/opt/data
+
+  mapper:
+    image: mapper:latest
+    container_name: map
+    volumes:
+      - ./app:/opt/app
+      - ./data:/opt/data
+    environment:
+      - REPO_PATH=${REPO_PATH}

@@ -4,15 +4,27 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
+            "label": "build-json-to-csv",
             "type": "shell",
-            "command": "docker build -t convert:latest --target build --file ./Dockerfile .",
+            "command": "docker build -t convert:latest --target build --file ./Dockerfile.json2csv .",
             "group": "none"
         },
         {
-            "label": "run",
+            "label": "run-json-to-csv",
             "type": "shell",
             "command": "docker-compose up convert",
+            "group": "none"
+        },
+        {
+            "label": "build-file-to-test-map",
+            "type": "shell",
+            "command": "docker build -t mapper:latest --target build --file ./Dockerfile.file2testmap .",
+            "group": "none"
+        },
+        {
+            "label": "run-file-to-test-map",
+            "type": "shell",
+            "command": "$env:REPO_PATH='venasolutions/mt-server'; docker-compose up mapper",
             "group": "none"
         }
     ]
