@@ -1,0 +1,13 @@
+FROM node As build
+
+ENV FILE_PATH=""
+
+# install node_modules
+COPY ./app /opt
+WORKDIR /opt
+RUN npm install
+
+RUN mkdir /opt/app
+WORKDIR /opt/app
+CMD ["npm", "run", "start:analysemap"]
+

@@ -27,6 +27,20 @@
             "command": "$env:REPO_PATH='venasolutions/mt-server'; $env:START_PAGE='5'; $env:LAST_PR='PR'; $env:FILE_PATH='PR-yyyy-mm-dd'; docker-compose up mapper",
             "group": "none",
             "problemMatcher": []
+        },
+        {
+            "label": "build-analyse-map",
+            "type": "shell",
+            "command": "docker build -t analysemap:latest --target build --file ./Dockerfile.analysemap .",
+            "group": "none",
+            "problemMatcher": []
+        },
+        {
+            "label": "run-analyse-map",
+            "type": "shell",
+            "command": "$env:FILE_PATH='../data/filemap'; docker-compose up analysemap",
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }

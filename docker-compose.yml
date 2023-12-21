@@ -17,3 +17,12 @@ services:
       - START_PAGE=${START_PAGE}
       - LAST_PR=${LAST_PR}
       - FILE_PATH=${FILE_PATH}
+  
+  analysemap:
+    image: analysemap:latest
+    container_name: analyse
+    volumes:
+      - ./app:/opt/app
+      - ./data:/opt/data
+    environment:
+      - FILE_PATH=${FILE_PATH}
