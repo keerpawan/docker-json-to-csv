@@ -38,7 +38,7 @@
         {
             "label": "run-analyse-map",
             "type": "shell",
-            "command": "$env:FILE_PATH='../data/filemap'; docker-compose up analysemap",
+            "command": "$env:FILE_PATH='../data/16498-2023-12-21'; docker-compose up analysemap",
             "group": "none",
             "problemMatcher": []
         }

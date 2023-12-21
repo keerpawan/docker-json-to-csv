@@ -1,6 +1,7 @@
 // Entrypoint for a node module that imports the github-client module
 
 const githubClient = require('./github-client');
+const helper = require('./helper');
 
 const repoName = process.argv[2];
 const startPage = process.argv[3];
@@ -9,8 +10,7 @@ const fileMapName = process.argv[5];
 
 console.log(`Getting pulls for ${repoName} page: ${startPage} after PR: ${lastPR} loading map from ${fileMapName}`);
 
-const testFileRegex = /.*org.vena.qa.api.*\.java/;
-const codeFileRegex = /mt-parent.*org.vena.*\.java/;
+
 const releaseTitleRegex = /Release.*/;
 const fileMap = {};
 
@@ -44,18 +44,7 @@ const getFiles = function(pullNumber) {
 const updateMap = function(files) {
   console.log("updateMap called");
 
-  const testFiles = [];
-  const codeFiles = [];
-
-  const fileNames = files.map(function(file) {
-    if (testFileRegex.test(file.filename)) {
-      testFiles.push(file.filename);
-    }
-    if (codeFileRegex.test(file.filename)) {
-      codeFiles.push(file.filename);
-    }
-    return file.filename
-  });
+  const { fileNames, testFiles, codeFiles } = helper.sortFileTypes(files);
 
   console.log(`fileNames.length: ${fileNames.length}`);
   console.log(`testFiles.length: ${testFiles.length}`);
