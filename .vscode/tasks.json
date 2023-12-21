@@ -24,7 +24,7 @@
         {
             "label": "run-file-to-test-map",
             "type": "shell",
-            "command": "$env:REPO_PATH='venasolutions/mt-server'; $env:START_PAGE='1'; $env:LAST_PR='16498'; docker-compose up mapper",
+            "command": "$env:REPO_PATH='venasolutions/mt-server'; $env:START_PAGE='76'; $env:LAST_PR='0'; docker-compose up mapper",
             "group": "none",
             "problemMatcher": []
         }

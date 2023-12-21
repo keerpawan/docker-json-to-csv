@@ -10,6 +10,7 @@ console.log(`Getting pulls for ${repoName} page: ${startPage} after PR: ${lastPR
 
 const testFileRegex = /.*org.vena.qa.api.*\.java/;
 const codeFileRegex = /mt-parent.*org.vena.*\.java/;
+const releaseTitleRegex = /Release.*/;
 const fileMap = {};
 
 // this function reads the arguments passed to the script REPO_PATH and calls getPulls
@@ -85,9 +86,9 @@ const fullScan = async function() {
       // For each pull request, get the files
       for (const pull of pullsData) {
         console.log('-----------------------------------');
-        console.log(`Evalutating pull request ${pull.merged_at} ${pull.number}`);
+        console.log(`Evalutating pull request ${pull.merged_at} ${pull.number} "${pull.title}"`);
         // skip if pull request is not merged or not the last PR to start from
-        if (pull.merged_at === null || pull.number > lastPRNumer) {
+        if (pull.merged_at === null || pull.number < lastPRNumer || releaseTitleRegex.test(pull.title)) {
           console.log(`Skipping pull request ${pull.number}`);
           continue;
         }
