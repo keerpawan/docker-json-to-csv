@@ -3,9 +3,13 @@
 const githubClient = require('./github-client');
 
 const repoName = process.argv[2];
+const startPage = process.argv[3];
+const lastPR = process.argv[4];
 
-console.log(`Getting pulls for ${repoName}`);
+console.log(`Getting pulls for ${repoName} page: ${startPage} after PR: ${lastPR}`);
 
+const testFileRegex = /.*org.vena.qa.api.*\.java/;
+const codeFileRegex = /mt-parent.*org.vena.*\.java/;
 const fileMap = {};
 
 // this function reads the arguments passed to the script REPO_PATH and calls getPulls
@@ -16,9 +20,6 @@ const getNextPulls = function(page) {
 const getFiles = function(pullNumber) {
   return githubClient.getFiles(repoName, pullNumber);
 }
-
-const testFileRegex = /.*org.vena.qa.api.*\.java/;
-const codeFileRegex = /mt-parent.*org.vena.*\.java/;
 
 const updateMap = function(files) {
   console.log("updateMap called");
@@ -45,7 +46,7 @@ const updateMap = function(files) {
     return; 
   }
 
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>> Found test and code files <<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>> Found test and code files <<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
   codeFiles.forEach(function(codeFile) {
     if (fileMap[codeFile]) {
@@ -60,19 +61,21 @@ const updateMap = function(files) {
 };
 
 // this function writes the fileMap to a file
-const writeMap = function() {
+const writeMap = function(fileName) {
   console.log("writing map");
   console.log(`fileMap.length: ${Object.keys(fileMap).length}`);
   const fs = require('fs');
   const util = require('util');
   const writeFile = util.promisify(fs.writeFile);
   const mapString = JSON.stringify(fileMap, null, 2);
-  return writeFile('../data/fileMap.json', mapString);
+  return writeFile(`../data/${fileName}.json`, mapString);
 };
 
-const main = async function() {
+const fullScan = async function() {
+  let finalPullNumer;
   // number of pages to get (30 PRs per page) - Nothing found until page 76 or 9000th PR early 2020
-  let pageNumber = 76;
+  let pageNumber = startPage ? parseInt(startPage) : 76;
+  const lastPRNumer = lastPR ? parseInt(lastPR) : 0;
   while (pageNumber > 0) {
     console.log("#############################################");
     console.log(`Getting pulls for page ${pageNumber}`);
@@ -83,8 +86,8 @@ const main = async function() {
       for (const pull of pullsData) {
         console.log('-----------------------------------');
         console.log(`Evalutating pull request ${pull.merged_at} ${pull.number}`);
-        // skip if pull request is not merged
-        if (pull.merged_at === null) {
+        // skip if pull request is not merged or not the last PR to start from
+        if (pull.merged_at === null || pull.number > lastPRNumer) {
           console.log(`Skipping pull request ${pull.number}`);
           continue;
         }
@@ -101,6 +104,7 @@ const main = async function() {
           console.log(`Error getting files for pull request ${pull.number}`);
           console.log(err);
         }
+        finalPullNumer = pull.number;
       }
     } catch (err) {
       console.log("*******************ERROR************************");
@@ -119,8 +123,8 @@ const main = async function() {
   }
   console.log("\n\n\n");
   // Write to file
-  writeMap();
+  writeMap(finalPullNumer);
   console.log("Done");
 }
 
-main();
+fullScan();

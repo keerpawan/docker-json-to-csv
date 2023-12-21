@@ -1,6 +1,8 @@
 FROM node As build
 
 ENV REPO_PATH=""
+ENV START_PAGE=""
+ENV LAST_PR=""
 
 # install node_modules
 COPY ./app /opt

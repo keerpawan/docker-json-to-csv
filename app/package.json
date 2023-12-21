@@ -4,14 +4,14 @@
     "description": "Converts Json to CSV",
     "scripts": {
         "start:json2csv": "node json-to-csv.js",
-        "start:file2testmap": "node file-to-test-mapper.js $REPO_PATH"
+        "start:file2testmap": "node file-to-test-mapper.js $REPO_PATH $START_PAGE $LAST_PR",
+        "start:analysefile": "node analyse-file.js $FILE_PATH"
     },
     "author": "keerpawan",
     "license": "ISC",
     "dependencies": {
         "@octokit/core": "^5.0.2",
         "dotenv": "^16.3.1",
-        "jsonexport": "^3.2.0",
-        "request": "^2.88.2"
+        "jsonexport": "^3.2.0"
     }
 }

@@ -14,3 +14,5 @@ services:
       - ./data:/opt/data
     environment:
       - REPO_PATH=${REPO_PATH}
+      - START_PAGE=${START_PAGE}
+      - LAST_PR=${LAST_PR}
