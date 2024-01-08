@@ -4,8 +4,9 @@
     "description": "Converts Json to CSV",
     "scripts": {
         "start:json2csv": "node json-to-csv.js",
-        "start:file2testmap": "node file-to-test-mapper.js $REPO_PATH $START_PAGE $LAST_PR",
-        "start:analysefile": "node analyse-file.js $FILE_PATH"
+        "start:file2testmap": "node file-to-test-mapper.js $REPO_PATH $START_PAGE $LAST_PR $FILE_PATH",
+        "start:analysemap": "node analyse-map.js $FILE_PATH",
+        "start:test2run": " node tests-to-run.js $FILE_PATH $REPO_PATH $PR_NUMBER"
     },
     "author": "keerpawan",
     "license": "ISC",
