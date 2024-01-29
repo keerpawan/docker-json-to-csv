@@ -16,13 +16,18 @@ docker build -t convert:latest --target build --file ./Dockerfile .
 
 ## Run
 
-### 1. Run container
+### 1. Put the json file under the data dir
+```
+data/input.json
+```
+
+### 2. Run container
 
 ```
 docker-compose up convert
 ```
 
-### 2. Look at generated csv file 
+### 3. Look at generated csv file 
 
 ```
 cat data/output.csv
